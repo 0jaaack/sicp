@@ -1,4 +1,4 @@
-(ns chapter1.exercise6)
+(ns chapter1.exercise1.6)
 
 (defn new-if [predicate then-clause else-clause]
   (cond predicate then-clause :else else-clause))
@@ -7,9 +7,6 @@
 
 (defn good-enough? [guess x]
   (< (Math/abs (- (square guess) x)) 0.001))
-
-(defn improve [guess x]
-  (average guess (/ x guess)))
 
 (defn average [x y]
   (/ (+ x y) 2))

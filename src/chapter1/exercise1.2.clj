@@ -1,4 +1,4 @@
-(ns chapter1.exercise2)
+(ns chapter1.exercise1.2)
 
 (/ (+ 5
       4

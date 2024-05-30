@@ -1,4 +1,4 @@
-(ns chapter1.exercise3)
+(ns chapter1.exercise1.3)
 
 (defn square [x] (* x x))
 
