@@ -24,15 +24,14 @@
 
 (defn inc [n] (+ n 1))
 
-(defn sum-cubes [a b]
+(defn sum-cubes2 [a b]
   (sum cube a inc b))
 
-(defn sum-integers [a b]
+(defn sum-integers2 [a b]
   (sum identity a inc b))
 
-(defn pi-sum [a b]
+(defn pi-sum2 [a b]
   (sum (fn [x] (/ 1.0 (* x (+ x 2)))) a (fn [x] (x + 4)) b))
 
 (defn integral [f a b dx]
   (* (sum f (+ a (/ dx 2.0)) (fn [x] (+ x dx)) b) dx))
-
