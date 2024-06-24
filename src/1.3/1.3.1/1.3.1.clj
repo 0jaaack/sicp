@@ -1,4 +1,4 @@
-(ns chapter1.1.3.1)
+(ns 1.3.1.1.3.1)
 
 (defn cube [x] (* x x x))
 

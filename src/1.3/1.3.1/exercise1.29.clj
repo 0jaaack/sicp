@@ -1,5 +1,5 @@
-(ns chapter1.exercise1.29
-  (:require [chapter1.1.3.1 :refer [sum]]))
+(ns 1.3.1.exercise1.29
+  (:require [1.3.1.1.3.1 :refer [sum]]))
 
 (defn simpson [f a b n]
   (defn h [n] (/ (- b a) n))
