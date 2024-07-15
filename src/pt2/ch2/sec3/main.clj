@@ -1,5 +1,6 @@
 (ns pt2.ch2.sec3.main
-  (:require [pt1.ch2.sec2.main :refer [fib]]))
+  (:require [pt1.ch2.sec2.main :refer [fib]])
+  (:require [pt1.ch2.sec6.main :refer [prime?]]))
 
 (defn sum-odd-squares [tree]
   (cond (empty? tree) 0
@@ -100,3 +101,50 @@
 
 (list-fib-squares 10)
 ;; => (0 1 1 4 9 25 64 169 441 1156 3025)
+
+(fn [n]
+  (->> (enumerate-interval 1 n)
+       (map fib)
+       (map (fn [i] (map (fn [j] (list i j)) (enumerate-interval 1 (- i 1)))))
+       (accumulate concat nil)))
+
+(defn flatmap [proc seq]
+  (accumulate concat '() (map proc seq)))
+
+(defn prim-sum? [pair]
+  (prime? (+ (first pair) (second pair))))
+
+(defn make-prime-sum [pair]
+  (list (first pair) (second pair) (+ (first pair) (second pair))))
+
+(defn prime-sum-pairs [n]
+  (map make-prime-sum
+       (filter prim-sum?
+               (flatmap
+                (fn [i]
+                  (map (fn [j] (list i j))
+                       (enumerate-interval 1 (- i 1))))
+                (enumerate-interval 1 n)))))
+
+(defn prime-sum-pairs [n]
+  (->> (enumerate-interval 1 n)
+       (flatmap
+        (fn [i]
+          (map (fn [j] (list i j))
+               (enumerate-interval 1 (- i 1)))))
+       (filter prim-sum?)
+       (map make-prime-sum)))
+
+(defn remove [item sequence]
+  (filter (fn [x] (not (= x item))) sequence))
+
+(defn permutations [s]
+  (if (empty? s)
+    (list nil)
+    (flatmap (fn [x]
+               (map (fn [p] (cons x p))
+                    (permutations (remove x s))))
+             s)))
+
+(permutations '(1 2 3))
+;; => ((1 2 3) (1 3 2) (2 1 3) (2 3 1) (3 1 2) (3 2 1))
