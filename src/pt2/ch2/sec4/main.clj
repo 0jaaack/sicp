@@ -1,5 +1,6 @@
 (ns pt2.ch2.sec4.main
-  (:require [pt2.ch2.sec4.ex2.44 :refer [up-split]]))
+  (:require [pt2.ch2.sec4.ex2.44 :refer [up-split]]
+            [pt2.ch2.sec4.ex2.46 :refer [make-vect add-vect scale-vect xcor-vect ycor-vect]]))
 
 (defn wave []) ; dummy implementation
 (defn flip-vert [painter] painter) ; dummy implementation
@@ -55,3 +56,17 @@
   (let [combine4 (square-of-four flip-horiz identity
                                  rotate180 flip-vert)]
     (combine4 (corner-split painter n))))
+
+(defn make-frame [])
+(defn origin-frame [frame] frame) ; dummy implementation
+(defn edge1-frame [frame] frame) ; dummy implementation
+(defn edge2-frame [frame] frame) ; dummy implementation
+
+(defn frame-coord-map [frame]
+  (fn [v]
+    (add-vect
+     (origin-frame frame)
+     (add-vect (scale-vect (xcor-vect v)
+                           (edge1-frame frame))
+               (scale-vect (ycor-vect v)
+                           (edge2-frame frame))))))
