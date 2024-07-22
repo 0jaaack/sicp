@@ -1,6 +1,7 @@
 (ns pt2.ch2.sec4.main
   (:require [pt2.ch2.sec4.ex2.44 :refer [up-split]]
-            [pt2.ch2.sec4.ex2.46 :refer [make-vect add-vect scale-vect xcor-vect ycor-vect]]))
+            [pt2.ch2.sec4.ex2.46 :refer [add-vect scale-vect xcor-vect ycor-vect]]
+            [pt2.ch1.sec2.ex2.2 :refer [start-segment, end-segment]]))
 
 (defn wave []) ; dummy implementation
 (defn flip-vert [painter] painter) ; dummy implementation
@@ -70,3 +71,14 @@
                            (edge1-frame frame))
                (scale-vect (ycor-vect v)
                            (edge2-frame frame))))))
+
+(defn draw-line [p1 p2] (p1 p2)) ; dummy implementation
+
+(defn segments->painter [segment-list]
+  (fn [frame]
+    (
+     (fn [segment]
+       (draw-line
+        ((frame-coord-map frame) (start-segment segment))
+        ((frame-coord-map frame) (end-segment segment))))
+     segment-list)))
