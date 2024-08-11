@@ -81,3 +81,17 @@
 
 (defn make-from-mag-ang [r a]
   ((get 'make-from-mag-ang '(polar)) r a))
+
+;; message-passing
+
+(defn make-from-real-imag [x y]
+  (letfn [(dispatch [op]
+            (cond (= op 'real-part) x
+                  (= op 'imag-part) y
+                  (= op 'magnitude)
+                  (Math/sqrt (+ (Math/square x) (Math/square y)))
+                  (= op 'angle) (Math/atan y x)
+                  :else (throw (Exception. "Unknown operation -- MAKE-FROM-REAL-IMAG" op))))]
+    dispatch))
+
+(defn apply-generic [op arg] (arg op))
